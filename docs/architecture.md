@@ -29,5 +29,6 @@ The app uses SPA rendering because the data is operational and user-specific. Th
 ## Review checklist
 
 - `npm run test` covers domain logic and accessible interaction behavior
+- store tests cover async loading, derived projections, and region filtering
 - `npm run build` validates TypeScript and production bundling
 - `npm run lint` enforces Vue and TypeScript conventions
