@@ -14,9 +14,9 @@ export const router = createRouter({
       component: () => import('@/views/IncidentResponse.vue'),
     },
     {
-      path: '/architecture',
-      name: 'architecture',
-      component: () => import('@/views/ArchitectureNotes.vue'),
+      path: '/report-incident',
+      name: 'report-incident',
+      component: () => import('@/views/ReportIncident.vue'),
     },
   ],
 })

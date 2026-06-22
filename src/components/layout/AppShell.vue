@@ -7,12 +7,12 @@ const route = useRoute()
 const navigation = [
   { label: 'Operations', to: '/' },
   { label: 'Incidents', to: '/incidents' },
-  { label: 'Architecture', to: '/architecture' },
+  { label: 'Report incident', to: '/report-incident' },
 ] as const
 
 const currentTitle = computed(() => {
   if (route.name === 'incidents') return 'Incident response workspace'
-  if (route.name === 'architecture') return 'Architecture notes'
+  if (route.name === 'report-incident') return 'Report an incident'
   return 'Cloud service readiness'
 })
 </script>

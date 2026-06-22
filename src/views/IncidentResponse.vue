@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
 
 import IncidentCard from '@/components/incidents/IncidentCard.vue'
 import { useReadinessStore } from '@/stores/readiness'
@@ -20,6 +21,7 @@ onMounted(() => {
       region, next action, and runbook context stay visible without drilling through a
       dashboard.
     </p>
+    <RouterLink class="primary-action" to="/report-incident">Report incident</RouterLink>
 
     <p v-if="isLoading">Loading incident queue...</p>
     <div v-else-if="activeIncidents.length > 0" class="incident-grid">
@@ -45,6 +47,16 @@ onMounted(() => {
   color: var(--muted);
   font-size: 1.05rem;
   line-height: 1.6;
+}
+
+.primary-action {
+  width: fit-content;
+  border-radius: 0.5rem;
+  background: var(--accent-strong);
+  color: white;
+  font-weight: 800;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
 }
 
 .incident-grid {

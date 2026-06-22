@@ -10,8 +10,8 @@ LUMASERV's job description asks for Vue 3, TypeScript, Composition API, scalable
 
 This repository demonstrates those topics through a real-world scenario:
 
-- monitor cloud service health across regions and tenants
-- inspect incident response readiness
+- monitor cloud service health across regions and tenants through a local API
+- inspect and report incidents through validated HTTP endpoints
 - evaluate operational risk with typed domain logic
 - reuse accessible UI primitives
 - keep API and frontend state boundaries explicit
@@ -23,6 +23,7 @@ This repository demonstrates those topics through a real-world scenario:
 - TypeScript with strict compiler settings
 - Pinia for store-level state
 - Vue Router with lazy-loaded routes
+- Express API server with request validation
 - Vite build tooling
 - Vitest and Testing Library for focused behavior tests
 - CSS modules through scoped component styles and design tokens
@@ -33,6 +34,11 @@ This repository demonstrates those topics through a real-world scenario:
 npm install
 npm run dev
 ```
+
+The development command starts both services:
+
+- web app: `http://localhost:5173`
+- API: `http://localhost:8787`
 
 ## Quality checks
 
@@ -45,11 +51,12 @@ npm run build
 ## Architecture highlights
 
 - `src/domain` contains pure TypeScript models and scoring rules.
-- `src/services` contains typed API clients and mock transport.
+- `server` contains the local Express API for services and incident reports.
+- `src/services` contains the typed HTTP client used by Pinia stores.
 - `src/stores` owns state orchestration and keeps views thin.
 - `src/components` contains reusable, accessible UI components.
-- `src/views` contains route-level feature screens that are lazy-loaded.
-- `openapi/readiness.yaml` documents the REST contract the fixture client models.
+- `src/views` contains route-level feature screens, including the incident report flow.
+- `openapi/readiness.yaml` documents the REST contract implemented by the local API.
 
 ## Portfolio note
 

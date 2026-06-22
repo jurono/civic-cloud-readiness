@@ -15,6 +15,17 @@ export interface Incident {
   runbookUrl: string
 }
 
+export type NewIncidentReport = Pick<
+  Incident,
+  | 'title'
+  | 'serviceId'
+  | 'region'
+  | 'severity'
+  | 'customerImpact'
+  | 'nextAction'
+  | 'runbookUrl'
+>
+
 export function sortIncidentsByOperationalPriority(incidents: Incident[]): Incident[] {
   const severityOrder: Record<IncidentSeverity, number> = {
     sev1: 0,

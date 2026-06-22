@@ -1,5 +1,5 @@
-import type { Incident } from '@/domain/incidents'
-import type { CloudService } from '@/domain/readiness'
+import type { Incident } from '../src/domain/incidents'
+import type { CloudService } from '../src/domain/readiness'
 
 export const cloudServices: CloudService[] = [
   {
