@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: Civic Cloud Readiness API
+  version: 0.1.0
+  summary: Portfolio API contract for service readiness and incident response.
+servers:
+  - url: https://api.example.com
+paths:
+  /services:
+    get:
+      operationId: listServices
+      summary: List monitored cloud services
+      tags: [Readiness]
+      responses:
+        '200':
+          description: Services available to the current operator.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CloudService'
+  /incidents:
+    get:
+      operationId: listIncidents
+      summary: List active and recent incidents
+      tags: [Incidents]
+      responses:
+        '200':
+          description: Incident queue sorted by backend default ordering.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Incident'
+components:
+  schemas:
+    Region:
+      type: string
+      enum: [de-fra-1, de-ber-1, eu-ams-1]
+    ServiceStatus:
+      type: string
+      enum: [operational, degraded, maintenance, incident]
+    ServiceDependency:
+      type: object
+      required: [id, name, criticality, status]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        criticality:
+          type: string
+          enum: [low, medium, high]
+        status:
+          $ref: '#/components/schemas/ServiceStatus'
+    CloudService:
+      type: object
+      required:
+        - id
+        - name
+        - owner
+        - region
+        - status
+        - availabilityTarget
+        - availabilityActual
+        - p95LatencyMs
+        - errorRate
+        - lastDeploy
+        - dependencies
+        - wcagRisk
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        region:
+          $ref: '#/components/schemas/Region'
+        status:
+          $ref: '#/components/schemas/ServiceStatus'
+        availabilityTarget:
+          type: number
+        availabilityActual:
+          type: number
+        p95LatencyMs:
+          type: integer
+        errorRate:
+          type: number
+        lastDeploy:
+          type: string
+          format: date-time
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceDependency'
+        wcagRisk:
+          type: string
+          enum: [low, medium, high]
+    Incident:
+      type: object
+      required:
+        - id
+        - title
+        - serviceId
+        - region
+        - severity
+        - openedAt
+        - status
+        - customerImpact
+        - nextAction
+        - runbookUrl
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        serviceId:
+          type: string
+        region:
+          $ref: '#/components/schemas/Region'
+        severity:
+          type: string
+          enum: [sev1, sev2, sev3]
+        openedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [triage, mitigating, monitoring, resolved]
+        customerImpact:
+          type: string
+        nextAction:
+          type: string
+        runbookUrl:
+          type: string
+          format: uri

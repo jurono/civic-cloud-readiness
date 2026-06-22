@@ -49,6 +49,7 @@ npm run build
 - `src/stores` owns state orchestration and keeps views thin.
 - `src/components` contains reusable, accessible UI components.
 - `src/views` contains route-level feature screens that are lazy-loaded.
+- `openapi/readiness.yaml` documents the REST contract the fixture client models.
 
 ## Portfolio note
 
